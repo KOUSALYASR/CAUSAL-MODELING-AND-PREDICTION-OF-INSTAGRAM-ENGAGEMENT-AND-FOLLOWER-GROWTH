@@ -1,272 +1,148 @@
 # Causal Modeling and Prediction of Instagram Engagement and Follower Growth
 
 ## Overview
+This project presents a unified analytical framework that combines causal inference and predictive modeling to analyze Instagram engagement patterns and forecast follower growth.
 
-This project presents a unified analytical framework that integrates **causal inference** and **predictive modeling** to analyze Instagram engagement dynamics and forecast follower growth.
+Unlike traditional analytics systems that rely only on correlation-based insights, this framework identifies both:
+- What influences engagement (predictive modeling)
+- Why it influences engagement (causal inference)
 
-Unlike traditional correlation-based studies, this research distinguishes between:
-
-* **What works** (predictive modeling)
-* **Why it works** (causal inference)
-
-By combining Directed Acyclic Graphs (DAGs), Propensity Score Matching (PSM), Average Treatment Effect (ATE), and machine learning models such as Random Forest, XGBoost, ARIMA, LSTM, and Prophet, the framework provides both interpretability and forecasting power.
-
-SHAP-based explainability ensures transparency in model decisions.
+The system integrates machine learning, causal analysis, time-series forecasting, and explainable AI to provide interpretable and data-driven social media insights.
 
 ---
 
 ## Problem Statement
+Most existing Instagram analytics systems:
+- Depend primarily on correlation analysis
+- Lack interpretability in predictions
+- Fail to identify true causal drivers of engagement
+- Provide limited strategic insights for content optimization
 
-Most Instagram analytics studies:
-
-* Rely only on correlations
-* Use black-box predictive models
-* Fail to isolate true causal drivers
-* Lack interpretability for marketing decisions
-
-This project addresses these gaps by building an interpretable, data-driven system that:
-
-* Identifies causal drivers of engagement
-* Forecasts future performance
-* Provides explainable insights
-* Supports evidence-based social media strategy
+This project addresses these limitations through an integrated framework combining causal inference, predictive analytics, and explainable AI.
 
 ---
 
 ## Dataset
-
-* Source: Instagram data scraped using Instaloader
-* Target Account: @natgeo (National Geographic)
-* Sample Size: 100 posts
-* Focus: Organic engagement only (no paid ads, reels, or stories)
+- Source: Instagram data collected using Instaloader
+- Target Account: @natgeo
+- Sample Size: 100 Instagram posts
 
 ### Features Collected
+- Captions
+- Hashtags
+- Posting time
+- Media type (image/video)
+- Likes and comments
+- Follower count trends
 
-* Captions
-* Hashtags
-* Posting time (day, hour, weekday/weekend)
-* Media type (image/video)
-* Likes
-* Comments
-* Follower count over time
+### Engineered Features
+- Engagement Rate (ER)
+- Follower Growth
+- Sentiment polarity
+- Caption length
+- Hashtag count
+- Emoji count
 
-Derived metrics include:
+---
 
-* Engagement Rate (ER)
-* Follower Growth (ΔF)
-* Growth Rate
-* Sentiment polarity
-* Caption length
-* Hashtag count
-* Emoji count
+## Methodology
+
+### Data Processing
+- Text preprocessing and normalization
+- Sentiment analysis
+- Feature engineering
+- Temporal encoding
+- Engagement normalization
+
+### Causal Inference Framework
+- Directed Acyclic Graphs (DAGs)
+- Propensity Score Matching (PSM)
+- Average Treatment Effect (ATE)
+- Inverse Probability Weighting (IPW)
+- Doubly Robust Estimation
+
+### Predictive Modeling
+Implemented multiple predictive models including:
+- Random Forest
+- XGBoost
+- ARIMA
+- LSTM
+- Prophet
+
+### Explainable AI
+- SHAP-based feature importance analysis
+- Global and local interpretability
+- Transparent model decision analysis
 
 ---
 
 ## System Architecture
-
-The framework consists of four major layers:
-
-### 1. Data Layer
-
-* Instagram scraping via Instaloader
-* Structured storage of post-level and user-level features
-
-### 2. Processing Layer
-
-* Text preprocessing (tokenization, stopword removal)
-* Sentiment analysis
-* Temporal encoding
-* Engagement normalization
-* Feature engineering
-
-### 3. Causal Modeling Layer
-
-* Directed Acyclic Graph (DAG) construction
-* Propensity Score Matching (PSM)
-* Average Treatment Effect (ATE) estimation
-* Inverse Probability Weighting (IPW)
-* Doubly Robust Estimation
-
-This layer identifies true causal impact of:
-
-* Hashtag usage
-* Media type
-* Posting time
-* Caption sentiment
+Instagram Data → Feature Engineering → Causal Modeling → Predictive Modeling → SHAP Explainability → Engagement & Growth Forecasting
 
 ---
 
-### 4. Predictive Modeling Layer
-
-Machine learning models used:
-
-* Random Forest
-* XGBoost
-* ARIMA
-* LSTM
-* Prophet
-
-Predicts:
-
-* Future engagement rate
-* Expected likes/comments
-* Follower growth trajectory
-
-Model evaluation metric:
-
-* Mean Absolute Error (MAE)
+## Results
+- Random Forest achieved the best predictive performance with:
+  - R² Score: **0.8827**
+  - MAE: **21097.16**
+- Successfully identified key engagement drivers including:
+  - Number of comments
+  - Media type
+  - Hashtag usage
+  - Mentions
+- Forecasted follower growth trends using Prophet and LSTM models
+- Generated interpretable insights using SHAP explainability
 
 ---
 
-### 5. Explainability Layer
-
-To overcome black-box limitations, SHAP (SHapley Additive Explanations) is integrated.
-
-Provides:
-
-* Feature contribution ranking
-* Global and local interpretability
-* Strategy-level explanation
-* Transparent decision support
+## Performance Metrics
+- R² Score: **88.27%**
+- Mean Absolute Error (MAE): **21097.16**
+- Comparative evaluation performed across multiple ML and forecasting models
 
 ---
 
-## Exploratory Data Analysis Insights
-
-Key findings from graphical analysis:
-
-* Likes and comments follow a right-skewed distribution
-* Strong correlation between likes and comments (0.94)
-* Negative correlation between caption length and hashtag count (-0.62)
-* Video posts show higher engagement spread than image posts
-* Fewer hashtags often correspond to higher engagement rate
-* Negative sentiment captions surprisingly show higher engagement
-* Emoji count shows weak correlation with likes
-
-These insights guide both feature selection and strategy optimization.
-
----
-
-## Causal Inference Framework
-
-Treatment examples:
-
-* High vs. low hashtag count
-* Video vs. image format
-* Positive vs. negative sentiment
-* Weekday vs. weekend posting
-
-Average Treatment Effect (ATE):
-
-ATE = E[Y | T = 1] − E[Y | T = 0]
-
-Robust estimators:
-
-* IPW (Inverse Probability Weighting)
-* Doubly Robust Estimator
-
-This ensures identification of true drivers rather than confounded associations.
+## Technologies Used
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- XGBoost
+- TensorFlow / Keras
+- ARIMA
+- Prophet
+- SHAP
+- Instaloader
+- Matplotlib
+- Seaborn
+- Streamlit
 
 ---
 
-## Predictive Modeling Formula
-
-Engagement forecasting:
-
-ER(t+1) = f(Caption, Hashtags, Posting Time, Media Type, Likes, Comments, Followers, Sentiment)
-
-Model performance evaluated using:
-
-MAE = (1/n) Σ |Y - Ŷ|
-
-This supports:
-
-* Short-term post engagement prediction
-* Long-term follower growth forecasting
-
----
-
-## Key Contributions
-
-* Unified causal + predictive framework
-* Interpretable Instagram analytics
-* SHAP-based explainability
-* Evidence-based content optimization
-* Integration of statistical inference with machine learning
-* Real-world decision support system for marketers
+## Key Features
+- Unified causal + predictive analytics framework
+- Instagram engagement prediction
+- Follower growth forecasting
+- Explainable AI integration using SHAP
+- Time-series forecasting
+- Evidence-based social media strategy insights
 
 ---
 
 ## Applications
-
-* Influencer marketing optimization
-* Content scheduling strategy
-* Hashtag strategy refinement
-* Media format decision support
-* Digital branding analytics
-* Social media performance forecasting
+- Influencer marketing analytics
+- Social media strategy optimization
+- Content scheduling analysis
+- Engagement forecasting
+- Digital branding analytics
 
 ---
 
-## Technical Stack
-
-* Python
-* Pandas
-* Scikit-learn
-* XGBoost
-* ARIMA
-* LSTM
-* Prophet
-* SHAP
-* Instaloader
-* Matplotlib / Seaborn
-* Streamlit (for dashboard deployment)
-
----
-
-## Limitations
-
-* Limited to one verified account (@natgeo)
-* 100-post sample size
-* No paid advertisement data
-* No reels/stories included
-* Potential platform-specific bias
+## Conclusion
+This project demonstrates how causal inference and machine learning can be integrated to build an interpretable and predictive Instagram analytics framework. By distinguishing causation from correlation, the system provides more reliable and actionable insights for social media performance optimization.
 
 ---
 
 ## Future Work
-
-* Multi-account comparative analysis
-* Real-time dashboard deployment
-* Cross-platform analytics (YouTube, Twitter)
-* Deep multimodal modeling (image + text fusion)
-* AI-generated content authenticity detection
-* Larger-scale causal benchmarking
-
----
-
-## Research Contribution
-
-This work contributes to:
-
-* Causal Machine Learning (CML)
-* Social media analytics research
-* Explainable AI in marketing
-* Evidence-based digital strategy design
-
-It bridges the gap between statistical causation and machine learning prediction in the context of Instagram engagement dynamics.
-
----
-
-## Citation
-
-If using this work, please cite:
-
-Causal Modeling and Prediction of Instagram Engagement and Follower Growth: An Analytical Framework.
-
----
-
-## License
-MIT License
-
----
+- Extend the framework for multi-account comparative analysis
+- Deploy as a real-time social media analytics dashboard
